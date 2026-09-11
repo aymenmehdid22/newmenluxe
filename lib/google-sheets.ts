@@ -26,8 +26,7 @@ export async function appendOrderToSheet(order: SheetOrder): Promise<boolean> {
   try {
     const spreadsheetId = process.env.GOOGLE_SHEETS_ID;
     const email = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
-    const key = process.env.GOOGLE_PRIVATE_KEY?.replace(/\n/g, "
-");
+    const key = process.env.GOOGLE_PRIVATE_KEY?.replace(/\n/g, "\n");
     if (!spreadsheetId || !email || !key) return false;
 
     const auth = new google.auth.JWT({
