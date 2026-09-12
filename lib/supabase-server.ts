@@ -1,6 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
-
+import { CookieOptions } from '@supabase/ssr';
 // Cookie-based client for Server Components / Route Handlers (respects auth session).
 export function createClient() {
   const cookieStore = cookies();
@@ -12,11 +12,11 @@ export function createClient() {
         getAll() {
           return cookieStore.getAll();
         },
-        setAll(cookiesToSet) {
-          try {
-            cookiesToSet.forEach(({ name, value, options }) =>
-              cookieStore.set(name, value, options)
-            );
+       setAll(cookiesToSet: { name: string; value: string; options?: CookieOptions }[]) {
+  try {
+    cookiesToSet.forEach(({ name, value, options }) =>
+      cookieStore.set(name, value, options)
+    );
           } catch {
             // Called from a Server Component — safe to ignore, middleware refreshes sessions.
           }
