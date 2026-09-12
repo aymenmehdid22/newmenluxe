@@ -11,7 +11,7 @@ const BASE = "/images/products/paris-vintage-cap";
 function variantImages(variantId: string, label: string): ProductImage[] {
   return [1, 2].map((n) => ({
     id: variantId + "-" + n,
-    url: BASE + "/" + variantId + "-" + n + ".webp",
+    url: BASE + "/" + variantId + "-" + n + ".jpg",
     alt: label + " — Paris Vintage Cap (vue " + n + ")",
     variantId,
   }));
@@ -33,19 +33,16 @@ export const PRODUCTS: Product[] = [
       ...variantImages("bleu", "Bleu"),
       ...variantImages("rouge", "Rouge"),
       ...variantImages("vert", "Vert"),
-      ...variantImages("beige", "Beige"),
-      ...variantImages("jaune", "Jaune"),
+    
     ],
     variants: [
       { id: "noir", name: "Noir", color: "#161616", images: [], available: true },
-      { id: "bleu", name: "Bleu", color: "#2b4acb", images: [], available: true },
-      { id: "rouge", name: "Rouge", color: "#c0392b", images: [], available: true },
+      { id: "bleu", name: "Bleu", color: "#07228f", images: [], available: true },
+      { id: "rouge", name: "Rouge", color: "#57120a", images: [], available: true },
       { id: "vert", name: "Vert", color: "#2f9e44", images: [], available: true },
-      { id: "beige", name: "Beige", color: "#d9cbb2", images: [], available: true },
-      { id: "jaune", name: "Jaune", color: "#f2c94c", images: [], available: true },
     ],
     benefits: [
-      "Livraison 58 wilayas",
+      "Livraison 69 wilayas",
       "Paiement à la livraison",
       "À domicile ou Stopdesk",
     ],

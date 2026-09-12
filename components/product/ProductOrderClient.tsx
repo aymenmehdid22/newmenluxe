@@ -106,6 +106,8 @@ export default function ProductOrderClient({ product }: { product: Product }) {
             max={product.stock ?? 10}
           />
 
+          <OrderForm product={product} variant={variant} quantity={quantity} />
+
           {product.benefits && product.benefits.length > 0 && (
             <ul className="space-y-2 rounded-2xl border border-border bg-white p-4">
               {product.benefits.map((b) => (
@@ -123,8 +125,6 @@ export default function ProductOrderClient({ product }: { product: Product }) {
               <p className="mt-2 text-sm leading-relaxed text-muted">{product.description}</p>
             </details>
           )}
-
-          <OrderForm product={product} variant={variant} quantity={quantity} />
         </div>
       </div>
 

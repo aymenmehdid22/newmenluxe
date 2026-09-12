@@ -176,8 +176,14 @@ export default function OrderForm({
           </div>
         </div>
 
-        {deliveryType === "home" ? (
+        {/*
+          Commune input removed for "home" delivery.
+          Address input commented out below — re-enable by uncommenting if needed.
+          Stopdesk input removed entirely.
+        */}
+        {deliveryType === "home" && (
           <>
+            {/*
             <div>
               <label htmlFor="commune" className="label">
                 Commune
@@ -190,6 +196,8 @@ export default function OrderForm({
                 required
               />
             </div>
+            */}
+            {/*
             <div>
               <label htmlFor="address" className="label">
                 Adresse
@@ -203,21 +211,8 @@ export default function OrderForm({
                 required
               />
             </div>
+            */}
           </>
-        ) : (
-          <div>
-            <label htmlFor="stopdesk" className="label">
-              Stopdesk / agence
-            </label>
-            <input
-              id="stopdesk"
-              className="input"
-              value={stopdesk}
-              onChange={(e) => setStopdesk(e.target.value)}
-              placeholder="Nom de l'agence de retrait"
-              required
-            />
-          </div>
         )}
 
         {/* Honeypot: invisible to humans, bots fill it. */}
