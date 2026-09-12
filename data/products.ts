@@ -39,7 +39,7 @@ export const PRODUCTS: Product[] = [
       { id: "noir", name: "Noir", color: "#161616", images: [], available: true },
       { id: "bleu", name: "Bleu", color: "#07228f", images: [], available: true },
       { id: "rouge", name: "Rouge", color: "#57120a", images: [], available: true },
-      { id: "vert", name: "Vert", color: "#2f9e44", images: [], available: true },
+      { id: "vert", name: "Vert", color: "#20742f", images: [], available: true },
     ],
     benefits: [
       "Livraison 69 wilayas",
@@ -47,7 +47,7 @@ export const PRODUCTS: Product[] = [
       "À domicile ou Stopdesk",
     ],
     deliveryAvailable: true,
-    stock: 10,
+    stock: 20,
   },
 
   // ---- Example: add more products below, e.g. ----

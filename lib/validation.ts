@@ -35,19 +35,4 @@ export const orderSchema = z
     stopdesk: z.string().max(200).optional(),
     website: z.string().optional(), // honeypot — must stay empty
     attribution: attributionSchema.optional(),
-  })
-  .superRefine((data, ctx) => {
-    if (data.deliveryType === "home") {
-      if (!data.commune || data.commune.trim().length < 2) {
-        ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["commune"], message: "Commune requise" });
-      }
-      if (!data.address || data.address.trim().length < 5) {
-        ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["address"], message: "Adresse requise" });
-      }
-    }
-    if (data.deliveryType === "stopdesk") {
-      if (!data.stopdesk || data.stopdesk.trim().length < 2) {
-        ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["stopdesk"], message: "Stopdesk requis" });
-      }
-    }
   });
