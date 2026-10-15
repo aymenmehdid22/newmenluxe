@@ -16,6 +16,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <Link href="/admin/orders" className="text-muted transition hover:text-black">
               Commandes
             </Link>
+            <Link href="/admin/landing" className="text-muted transition hover:text-black">
+              Image mobile
+            </Link>
             <LogoutButton />
           </nav>
         </div>

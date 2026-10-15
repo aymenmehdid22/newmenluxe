@@ -1,5 +1,6 @@
-export function formatDZD(amount: number): string {
-  return amount.toLocaleString("en-US") + " DA";
+// Latin digits in both languages (what Algerian shoppers expect on prices).
+export function formatDZD(amount: number, lang: "fr" | "ar" = "fr"): string {
+  return amount.toLocaleString("en-US") + (lang === "ar" ? " دج" : " DA");
 }
 
 export function formatDate(iso: string): string {

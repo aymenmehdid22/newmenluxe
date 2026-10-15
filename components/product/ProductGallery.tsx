@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import type { ProductImage } from "@/types/product";
+import { useI18n } from "@/components/i18n/LanguageProvider";
 
 export default function ProductGallery({
   images,
@@ -11,6 +12,7 @@ export default function ProductGallery({
   images: ProductImage[];
   productName: string;
 }) {
+  const { t, dir } = useI18n();
   const [index, setIndex] = useState(0);
   const touchStartX = useRef<number | null>(null);
 
@@ -33,8 +35,9 @@ export default function ProductGallery({
           if (touchStartX.current == null) return;
           const dx = e.changedTouches[0].clientX - touchStartX.current;
           if (Math.abs(dx) > 40) {
-            if (dx < 0) go(safeIndex + 1);
-            else go(safeIndex - 1);
+            // Swipe direction follows the reading direction (RTL: next is to the left).
+            const next = dir === "rtl" ? dx > 0 : dx < 0;
+            go(next ? safeIndex + 1 : safeIndex - 1);
           }
           touchStartX.current = null;
         }}
@@ -53,7 +56,7 @@ export default function ProductGallery({
             }
           />
         ))}
-        <span className="absolute bottom-3 right-3 rounded-full bg-black/60 px-2.5 py-1 text-xs font-medium text-white md:hidden">
+        <span className="absolute bottom-3 end-3 rounded-full bg-black/60 px-2.5 py-1 text-xs font-medium text-white md:hidden">
           {safeIndex + 1} / {count}
         </span>
       </div>
@@ -65,7 +68,7 @@ export default function ProductGallery({
               key={img.id + "-" + i}
               type="button"
               onClick={() => setIndex(i)}
-              aria-label={"Image " + (i + 1)}
+              aria-label={t.imageN(i + 1)}
               className={
                 "relative h-16 w-16 shrink-0 overflow-hidden rounded-xl border-2 bg-white " +
                 (i === safeIndex ? "border-foreground" : "border-border")

@@ -25,3 +25,10 @@
     @apply rounded-xl bg-foreground px-6 py-3.5 text-sm font-bold tracking-wide text-white transition hover:bg-black active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60;
   }
 }
+
+/* Arabic: letter-spacing breaks letter joining, so disable it under RTL only.
+   (French/LTR is untouched.) */
+[dir="rtl"],
+[dir="rtl"] * {
+  letter-spacing: normal !important;
+}

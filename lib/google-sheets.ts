@@ -14,7 +14,8 @@ export type SheetOrder = {
   address: string;
   stopdesk: string;
   unitPrice: number;
-  totalPrice: number;
+  totalPrice: number; // product + delivery
+  deliveryPrice: number;
   status: string;
   utmSource: string;
   utmCampaign: string;
@@ -65,6 +66,7 @@ export async function appendOrderToSheet(order: SheetOrder): Promise<boolean> {
             order.status,
             order.utmSource,
             order.utmCampaign,
+            order.deliveryPrice, // new column S (appended so existing columns keep their place)
           ],
         ],
       },

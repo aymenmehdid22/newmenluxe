@@ -1,6 +1,7 @@
 "use client";
 
 import type { ProductVariant } from "@/types/product";
+import { useI18n } from "@/components/i18n/LanguageProvider";
 
 export default function ColorSelector({
   variants,
@@ -11,13 +12,15 @@ export default function ColorSelector({
   selectedId?: string;
   onSelect: (id: string) => void;
 }) {
+  const { t } = useI18n();
+  const nameOf = (v: ProductVariant) => t.colors[v.id] ?? v.name;
   const selected = variants.find((v) => v.id === selectedId);
   return (
     <div>
       <p className="label">
-        Couleur
+        {t.color}
         {selected && (
-          <span className="ml-1 font-normal normal-case text-muted">— {selected.name}</span>
+          <span className="ms-1 font-normal normal-case text-muted">— {nameOf(selected)}</span>
         )}
       </p>
       <div className="mt-2 flex flex-wrap gap-2">
@@ -31,7 +34,7 @@ export default function ColorSelector({
               disabled={!v.available}
               aria-pressed={active}
               className={
-                "flex items-center gap-2 rounded-full border bg-white py-1.5 pl-1.5 pr-3 text-sm transition " +
+                "flex items-center gap-2 rounded-full border bg-white py-1.5 ps-1.5 pe-3 text-sm transition " +
                 (active
                   ? "border-foreground font-semibold"
                   : "border-border text-muted hover:border-[#bbbbbb]") +
@@ -44,7 +47,7 @@ export default function ColorSelector({
                   style={{ backgroundColor: v.color }}
                 />
               )}
-              {v.name}
+              {nameOf(v)}
             </button>
           );
         })}

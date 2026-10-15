@@ -26,6 +26,7 @@ export type Order = {
   variant_name: string | null;
   quantity: number;
   unit_price: number;
+  delivery_price: number;
   total_price: number;
   currency: string;
   customer_name: string;

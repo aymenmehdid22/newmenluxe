@@ -60,7 +60,8 @@ export default async function AdminOrderDetailPage({ params }: { params: { id: s
         <Row label="Couleur" value={order.variant_name} />
         <Row label="Quantité" value={String(order.quantity)} />
         <Row label="Prix unitaire" value={formatDZD(order.unit_price)} />
-        <Row label="Total" value={<span className="font-extrabold">{formatDZD(order.total_price)}</span>} />
+        <Row label="Livraison (tarif)" value={formatDZD(order.delivery_price ?? 0)} />
+        <Row label="Total (livraison incluse)" value={<span className="font-extrabold">{formatDZD(order.total_price)}</span>} />
       </div>
 
       <div className="card divide-y divide-border p-5">

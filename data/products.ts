@@ -48,6 +48,17 @@ export const PRODUCTS: Product[] = [
     ],
     deliveryAvailable: true,
     stock: 20,
+    i18n: {
+      ar: {
+        description:
+          "كاسكيت فينتاج مطرّز بعبارة «PARIS». قطن فاخر، قصّة قابلة للتعديل، مقاس موحّد يناسب الجميع. أسلوب خالد يتماشى مع كل الإطلالات.",
+        benefits: [
+          "التوصيل إلى 69 ولاية",
+          "الدفع عند الاستلام",
+          "التوصيل للمنزل أو للمكتب (Stopdesk)",
+        ],
+      },
+    },
   },
 
   // ---- Example: add more products below, e.g. ----

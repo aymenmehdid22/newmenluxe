@@ -27,4 +27,6 @@ export type Product = {
   benefits?: string[];
   deliveryAvailable: boolean;
   stock?: number;
+  // Optional translated copy. The product `name` is intentionally NOT translated.
+  i18n?: { ar?: { description?: string; benefits?: string[] } };
 };

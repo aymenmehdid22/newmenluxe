@@ -11,7 +11,8 @@ const config: Config = {
         border: "#EAEAEA",
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+        // Inter has no Arabic glyphs: the browser falls back per-glyph to the Arabic font.
+        sans: ["var(--font-inter)", "var(--font-arabic)", "system-ui", "sans-serif"],
       },
     },
   },

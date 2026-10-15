@@ -1,7 +1,16 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { cookies } from "next/headers";
 import { PRODUCTS, getProductBySlug } from "@/data/products";
 import ProductOrderClient from "@/components/product/ProductOrderClient";
+import LanguageProvider from "@/components/i18n/LanguageProvider";
+import { LANG_COOKIE, parseLang } from "@/lib/i18n";
+import { getDeliveryRates } from "@/lib/delivery-rates";
+import { getMobileLandingImage } from "@/lib/landing-settings";
+
+// Rendered per request: the language comes from a cookie, and delivery rates /
+// the mobile-image switch must reflect admin changes immediately.
+export const dynamic = "force-dynamic";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
@@ -34,9 +43,15 @@ export function generateMetadata({ params }: { params: { product: string } }): M
   };
 }
 
-export default function ProductPage({ params }: { params: { product: string } }) {
+export default async function ProductPage({ params }: { params: { product: string } }) {
   const product = getProductBySlug(params.product);
   if (!product) notFound();
+
+  const lang = parseLang(cookies().get(LANG_COOKIE)?.value);
+  const [rates, mobileImage] = await Promise.all([
+    getDeliveryRates(),
+    getMobileLandingImage(product.id),
+  ]);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -53,12 +68,14 @@ export default function ProductPage({ params }: { params: { product: string } })
   };
 
   return (
-    <main className="mx-auto max-w-6xl px-4 pb-28 pt-4 md:pb-16 md:pt-8">
-      <ProductOrderClient product={product} />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-    </main>
+    <LanguageProvider initialLang={lang}>
+      <main className="mx-auto max-w-6xl px-4 pb-28 pt-4 md:pb-16 md:pt-8">
+        <ProductOrderClient product={product} rates={rates} mobileImage={mobileImage} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </main>
+    </LanguageProvider>
   );
 }
